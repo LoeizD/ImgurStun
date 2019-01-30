@@ -7,7 +7,11 @@ const imgur = require('imgur')
 const bodyParser = require('body-parser');
 
 
-// app.use(bodyParser)
+// parse application/x-www-form-urlencoded
+// app.use(bodyParser.urlencoded({ extended: false }))
+ 
+// parse application/json
+app.use(bodyParser.json())
 
 app.use(cors())
 
@@ -55,4 +59,4 @@ function postToImgur2() {
 
 }
 
-postToImgur2()
+// postToImgur2()
