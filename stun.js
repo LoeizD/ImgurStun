@@ -4,7 +4,10 @@ const cors = require('cors')
 const fetch = require("node-fetch")
 const fs = require('fs')
 const imgur = require('imgur')
+const bodyParser = require('body-parser');
 
+
+app.use(bodyParser);
 
 app.use(cors())
 
