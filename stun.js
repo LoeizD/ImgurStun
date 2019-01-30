@@ -7,7 +7,7 @@ const imgur = require('imgur')
 const bodyParser = require('body-parser');
 
 
-app.use(bodyParser);
+// app.use(bodyParser)
 
 app.use(cors())
 
