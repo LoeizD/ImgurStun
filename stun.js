@@ -11,7 +11,7 @@ app.use(cors())
 app.post('/image/', (req, res) => {
   // Upload image to CG's imgur account
   // req.body.image
-  console.log(req)
+  console.log(req.body)
 
   // Return the image's url
   res.json("OK:go")
