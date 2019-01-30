@@ -10,14 +10,15 @@ app.use(cors())
 
 app.post('/image/', (req, res) => {
   // Upload image to CG's imgur account
-  req.body.image
+  // req.body.image
+  console.log(JSON.stringify(req))
 
   // Return the image's url
   res.json("OK")
 })
 
 app.listen(6699, function () {
-  console.log('CORS-enabled web server listening on port 6600')
+  console.log('CORS-enabled web server listening on port 6699')
 })
 
 function postToImgur() {
