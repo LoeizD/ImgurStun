@@ -16,7 +16,7 @@ app.post('/image/', (req, res) => {
   res.json("OK")
 })
 
-app.listen(6600, function () {
+app.listen(6699, function () {
   console.log('CORS-enabled web server listening on port 6600')
 })
 
