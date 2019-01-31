@@ -36,9 +36,9 @@ async function postToImgur() {
     imgur.uploadFile('render.png'/*image*/)
       .then(function (json) {
           link = json.data.link
-          console.log(json.data.link)
+          console.log(json.data.link + 'imgur url')
           // finished(link)
-          resolve(link)
+          resolve(json.data.link)
       })
       .catch(function (err) {
           console.error(err.message)
