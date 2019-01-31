@@ -14,11 +14,25 @@ app.post('/image/', (req, res) => {
   const image = req.body // binary
   fs.writeFileSync('render.png', image)
 
-  const link = postToImgur()
-  console.log(link + 'ok')
+  // const link = postToImgur()
+  // console.log(link + 'ok')
+
+  imgur.setClientId('5cae520c0678db9')
+  imgur.setAPIUrl('https://api.imgur.com/3/')
+  let link = 'error'
+
+  imgur.uploadFile('render.png'/*image*/)
+      .then(function (json) {
+          link = json.data.link
+          console.log(json.data.link + 'imgur url')
+          res.json(`link: ${link}`)
+      })
+      .catch(function (err) {
+          console.error(err.message)
+          res.json(`link: ${link}`)
+      })
   
   // Return the image's url
-  res.json(`link: ${link}`)
 })
 
 app.listen(6699, function () {
@@ -32,7 +46,6 @@ async function postToImgur() {
 
   
   let promise = new Promise((resolve, reject) => {
-    // postToImgur((link) => {resolve(link)})
     imgur.uploadFile('render.png'/*image*/)
       .then(function (json) {
           link = json.data.link
