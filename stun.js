@@ -14,11 +14,7 @@ app.post('/image/', (req, res) => {
   const image = req.body // binary
   fs.writeFileSync('render.png', image)
 
-  let promise = new Promise((resolve, reject) => {
-    postToImgur((link) => {resolve(link)})
-  });
-
-  let link = await promise;
+ 
 
   const link = postToImgur()
   console.log(link + 'ok')
@@ -49,4 +45,12 @@ async function postToImgur(finished) {
         // await Promise.resolve(link);
         // return link
     })
+
+    let promise = new Promise((resolve, reject) => {
+      postToImgur((link) => {resolve(link)})
+    });
+  
+    link = await promise
+    return link
+
 }
