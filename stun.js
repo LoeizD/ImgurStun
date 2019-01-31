@@ -7,15 +7,16 @@ const imgur = require('imgur')
 const bodyParser = require('body-parser');
  
 // parse application/json
-app.use(bodyParser.json())
+// app.use(bodyParser.json())
+app.use(bodyParser.raw())
 
 app.use(cors())
 
 app.post('/image/', (req, res) => {
   // Upload image to CG's imgur account
   console.log(req.body)
-  console.log(req.body.image)
-  const image = req.body.image
+  // console.log(req.body.image)
+  const image = req.body //.image
 
   const link = postToImgur2(image)
   console.log(link)
