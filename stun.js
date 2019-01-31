@@ -64,7 +64,7 @@ function postToImgur2(image) {
   imgur.setAPIUrl('https://api.imgur.com/3/')
   const link = 'error'
 
-  imgur.uploadFile(/*'img.png'*/image)
+  imgur.uploadFile('render.png'/*image*/)
     .then(function (json) {
         link = json.data.link
         console.log(json.data.link)
