@@ -8,7 +8,7 @@ const bodyParser = require('body-parser');
  
 // parse application/json
 // app.use(bodyParser.json())
-app.use(bodyParser.raw({type: '*/*'}))
+app.use(bodyParser.raw({type: 'bin', limit: '15mb'}))
 
 app.use(cors())
 
