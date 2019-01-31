@@ -81,8 +81,7 @@ function postToImgur2(image) {
 function testBytes(str) {
   const arr = str.split(" ")
   console.log(arr)
-  arr.
-  
+  // arr. 
 }
 
 testBytes('01010110 10010011 01010011 11010101')
