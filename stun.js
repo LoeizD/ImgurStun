@@ -25,24 +25,26 @@ app.listen(6699, function () {
   console.log('CORS-enabled web server listening on port 6699')
 })
 
-async function postToImgur(finished) {
+async function postToImgur() {
   imgur.setClientId('5cae520c0678db9')
   imgur.setAPIUrl('https://api.imgur.com/3/')
   let link = 'error'
 
-  imgur.uploadFile('render.png'/*image*/)
-    .then(function (json) {
-        link = json.data.link
-        console.log(json.data.link)
-        finished(link)
-        let promise = new Promise((resolve, reject) => {
-          postToImgur((link) => {resolve(link)})
-        });
-      
-        link = await promise
-        return link
-    })
-    .catch(function (err) {
-        console.error(err.message)
-    })
+  
+  let promise = new Promise((resolve, reject) => {
+    // postToImgur((link) => {resolve(link)})
+    imgur.uploadFile('render.png'/*image*/)
+      .then(function (json) {
+          link = json.data.link
+          console.log(json.data.link)
+          // finished(link)
+          resolve(link)
+      })
+      .catch(function (err) {
+          console.error(err.message)
+      })
+    });
+  
+    link = await promise
+    return link
 }
