@@ -1,22 +1,9 @@
 const express = require('express')
 const app = express()
 const cors = require('cors')
-const fetch = require("node-fetch")
 const fs = require('fs')
 const imgur = require('imgur')
 const bodyParser = require('body-parser');
- 
-// parse application/json
-// app.use(bodyParser.json({limit: '20mb', extended: true}))
-
-/*
-app.use (function(req, res, next) {
-  req.rawBody = '';
-  req.setEncoding('utf8');
-  req.on('data', function(chunk) { req.rawBody += chunk });
-  next()
-})
-*/
 
 app.use(bodyParser.raw({type: '*/*', limit: '15mb'}))
 
@@ -24,12 +11,16 @@ app.use(cors())
 
 app.post('/image/', (req, res) => {
   // Upload image to CG's imgur account
-  // console.log(req.body.image)
-  // console.log(req.rawBody)
-  const image = req.body//.image
+  const image = req.body // binary
   fs.writeFileSync('render.png', image)
 
-  const link = postToImgur2(image)
+  let promise = new Promise((resolve, reject) => {
+    postToImgur((link) => {resolve(link)})
+  });
+
+  let link = await promise;
+
+  const link = postToImgur()
   console.log(link + 'ok')
   
   // Return the image's url
@@ -40,26 +31,7 @@ app.listen(6699, function () {
   console.log('CORS-enabled web server listening on port 6699')
 })
 
-/*
-function postToImgur() {
-  console.log("hi nigg");
-  
-  const endpoint = 'https://api.imgur.com/3/image'
-  const apiKey = '5cae520c0678db9'
-
-  // const img = fs.readFileSync('img.png')
-  const img = 'R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7'
-
-  fetch(endpoint, {
-    method: 'POST',
-    body: `{image='${img}'}`,
-    headers: { 'Authorization': `Client-ID ${apiKey}` }, })
-    .then(res => res.json())
-    .then(json => console.log(json));
-}
-*/
-
-async function postToImgur2(image) {
+function postToImgur(finished) {
   imgur.setClientId('5cae520c0678db9')
   imgur.setAPIUrl('https://api.imgur.com/3/')
   let link = 'error'
@@ -68,22 +40,13 @@ async function postToImgur2(image) {
     .then(function (json) {
         link = json.data.link
         console.log(json.data.link)
-        await Promise.resolve(link);
+        finished(link)
+        // await Promise.resolve(link);
         // return link
     })
     .catch(function (err) {
         console.error(err.message)
-        await Promise.resolve(link);
+        // await Promise.resolve(link);
         // return link
     })
 }
-
-// postToImgur2()
-
-function testBytes(str) {
-  const arr = str.split(" ")
-  console.log(arr)
-  // arr. 
-}
-
-testBytes('01010110 10010011 01010011 11010101')
