@@ -56,12 +56,13 @@ function postToImgur2(image) {
     .then(function (json) {
         link = json.data.link
         console.log(json.data.link)
+        return link
     })
     .catch(function (err) {
         console.error(err.message)
+        return link
     });
 
-  return link
 }
 
 // postToImgur2()
