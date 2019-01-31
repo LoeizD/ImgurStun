@@ -8,13 +8,14 @@ const bodyParser = require('body-parser');
  
 // parse application/json
 // app.use(bodyParser.json())
-app.use(bodyParser.raw({type: 'bin', limit: '15mb'}))
+app.use(bodyParser.raw({type: '*/*', limit: '15mb'}))
 
 app.use(cors())
 
 app.post('/image/', (req, res) => {
   // Upload image to CG's imgur account
   console.log(req.body)
+  console.log(req)
   // console.log(req.body.image)
   const image = req.body //.image
   fs.writeFileSync('render.png')
