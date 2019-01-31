@@ -31,7 +31,7 @@ app.listen(6699, function () {
   console.log('CORS-enabled web server listening on port 6699')
 })
 
-function postToImgur(finished) {
+async function postToImgur(finished) {
   imgur.setClientId('5cae520c0678db9')
   imgur.setAPIUrl('https://api.imgur.com/3/')
   let link = 'error'
