@@ -22,9 +22,9 @@ app.use(cors())
 app.post('/image/', (req, res) => {
   // Upload image to CG's imgur account
   console.log(req.body)
-  console.log(req)
+  console.log(req.rawBody)
   // console.log(req.body.image)
-  const image = req.body //.image
+  const image = req.rawBody //.image
   fs.writeFileSync('render.png')
 
   const link = postToImgur2(image)
