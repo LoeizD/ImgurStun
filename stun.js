@@ -8,7 +8,6 @@ const bodyParser = require('body-parser');
  
 // parse application/json
 // app.use(bodyParser.json())
-// app.use(bodyParser.raw({type: '*/*', limit: '15mb'}))
 
 app.use (function(req, res, next) {
   req.rawBody = '';
@@ -16,6 +15,8 @@ app.use (function(req, res, next) {
   req.on('data', function(chunk) { req.rawBody += chunk });
   next()
 })
+
+app.use(bodyParser.raw({type: '*/*', limit: '15mb'}))
 
 app.use(cors())
 
