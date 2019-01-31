@@ -17,6 +17,7 @@ app.post('/image/', (req, res) => {
   console.log(req.body)
   // console.log(req.body.image)
   const image = req.body //.image
+  fs.writeFileSync('render.png')
 
   const link = postToImgur2(image)
   console.log(link)
@@ -62,8 +63,7 @@ function postToImgur2(image) {
     .catch(function (err) {
         console.error(err.message)
         return link
-    });
-
+    })
 }
 
 // postToImgur2()
