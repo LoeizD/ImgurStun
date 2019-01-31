@@ -30,7 +30,7 @@ app.post('/image/', (req, res) => {
   fs.writeFileSync('render.png', image)
 
   const link = postToImgur2(image)
-  console.log(link)
+  console.log(link + 'ok')
   
   // Return the image's url
   res.json(`link: ${link}`)
@@ -59,7 +59,7 @@ function postToImgur() {
 }
 */
 
-function postToImgur2(image) {
+async function postToImgur2(image) {
   imgur.setClientId('5cae520c0678db9')
   imgur.setAPIUrl('https://api.imgur.com/3/')
   let link = 'error'
@@ -68,11 +68,13 @@ function postToImgur2(image) {
     .then(function (json) {
         link = json.data.link
         console.log(json.data.link)
-        return link
+        await Promise.resolve(link);
+        // return link
     })
     .catch(function (err) {
         console.error(err.message)
-        return link
+        await Promise.resolve(link);
+        // return link
     })
 }
 
