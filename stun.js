@@ -5,10 +5,6 @@ const fetch = require("node-fetch")
 const fs = require('fs')
 const imgur = require('imgur')
 const bodyParser = require('body-parser');
-
-
-// parse application/x-www-form-urlencoded
-// app.use(bodyParser.urlencoded({ extended: false }))
  
 // parse application/json
 app.use(bodyParser.json())
@@ -17,17 +13,22 @@ app.use(cors())
 
 app.post('/image/', (req, res) => {
   // Upload image to CG's imgur account
-  // req.body.image
   console.log(req.body)
+  console.log(req.body.image)
+  const image = req.body.image
 
+  const link = postToImgur2(image)
+  console.log(link)
+  
   // Return the image's url
-  res.json("OK:go")
+  res.json(`link: ${link}`)
 })
 
 app.listen(6699, function () {
   console.log('CORS-enabled web server listening on port 6699')
 })
 
+/*
 function postToImgur() {
   console.log("hi nigg");
   
@@ -44,19 +45,23 @@ function postToImgur() {
     .then(res => res.json())
     .then(json => console.log(json));
 }
+*/
 
-function postToImgur2() {
-  imgur.setClientId('5cae520c0678db9');
-  imgur.setAPIUrl('https://api.imgur.com/3/');
+function postToImgur2(image) {
+  imgur.setClientId('5cae520c0678db9')
+  imgur.setAPIUrl('https://api.imgur.com/3/')
+  const link = 'error'
 
-  imgur.uploadFile('img.png')
+  imgur.uploadFile(/*'img.png'*/image)
     .then(function (json) {
-        console.log(json.data.link);
+        link = json.data.link
+        console.log(json.data.link)
     })
     .catch(function (err) {
-        console.error(err.message);
+        console.error(err.message)
     });
 
+  return link
 }
 
 // postToImgur2()
