@@ -7,7 +7,7 @@ const imgur = require('imgur')
 const bodyParser = require('body-parser');
  
 // parse application/json
-app.use(bodyParser.json({limit: '15mb'}))
+app.use(bodyParser.json({limit: '20mb', extended: true}))
 
 /*
 app.use (function(req, res, next) {
