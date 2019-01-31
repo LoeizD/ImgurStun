@@ -7,7 +7,7 @@ const imgur = require('imgur')
 const bodyParser = require('body-parser');
  
 // parse application/json
-// app.use(bodyParser.json({limit: '20mb', extended: true}))
+app.use(bodyParser.json({limit: '20mb', extended: true}))
 
 /*
 app.use (function(req, res, next) {
@@ -18,16 +18,15 @@ app.use (function(req, res, next) {
 })
 */
 
-app.use(bodyParser.raw({type: '*/*', limit: '15mb'}))
+// app.use(bodyParser.raw({type: '*/*', limit: '15mb'}))
 
 app.use(cors())
 
 app.post('/image/', (req, res) => {
   // Upload image to CG's imgur account
-  console.log(req.body.image)
-  // console.log(req.rawBody)
   // console.log(req.body.image)
-  const image = req.body //.image
+  // console.log(req.rawBody)
+  const image = req.body.image
   fs.writeFileSync('render.png', image)
 
   const link = postToImgur2(image)
