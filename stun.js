@@ -62,7 +62,7 @@ function postToImgur() {
 function postToImgur2(image) {
   imgur.setClientId('5cae520c0678db9')
   imgur.setAPIUrl('https://api.imgur.com/3/')
-  const link = 'error'
+  let link = 'error'
 
   imgur.uploadFile('render.png'/*image*/)
     .then(function (json) {
