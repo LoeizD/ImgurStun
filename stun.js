@@ -21,7 +21,7 @@ app.post('/image/', (req, res) => {
   imgur.setAPIUrl('https://api.imgur.com/3/')
   let link = 'error'
 
-  imgur.uploadFile('render.png'/*image*/)
+  imgur.uploadFile('render.png', '', 'Ready for Stunfest 2019!')
       .then(function (json) {
           link = json.data.link
           console.log(json.data.link + 'imgur url')
@@ -31,8 +31,6 @@ app.post('/image/', (req, res) => {
           console.error(err.message)
           res.json(`link: ${link}`)
       })
-  
-  // Return the image's url
 })
 
 app.listen(6699, function () {
